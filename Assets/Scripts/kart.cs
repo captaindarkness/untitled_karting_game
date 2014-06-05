@@ -7,7 +7,7 @@ public class kart : MonoBehaviour
     public float acceleration;
     public float currentSpeed;
     public int turnSpeed;
-    bool isMoving;
+    bool isMovingForward;
     private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -70,7 +70,7 @@ public class kart : MonoBehaviour
                 //Acceleration gets added to currentSpeed
                 currentSpeed += acceleration;
             }
-            isMoving = true;
+            isMovingForward = true;
         }
         else
         {
@@ -82,7 +82,7 @@ public class kart : MonoBehaviour
             if (currentSpeed < 0)
             {
                 currentSpeed = 0.0f;
-                isMoving = false;
+				isMovingForward = false;
             }
         }
         //turn Right
@@ -99,7 +99,7 @@ public class kart : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime);
         }
         //Constant movement after accelerating
-        if (isMoving)
+		if (isMovingForward)
         {
             transform.Translate(0, 0, currentSpeed * Time.deltaTime);
 
